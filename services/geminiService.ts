@@ -1,30 +1,34 @@
-// Frontend-safe stubs
-// Gemini runs ONLY on backend
+**geminiService.ts**
 
-export async function getPredictiveInsights(_text: string) {
-  return [
-    {
-      id: "risk-1",
-      label: "Potential Harassment",
-      confidence: 0.92,
-      urgency: 7,
-      recommended_action: "safety_check",
-    },
-    {
-      id: "risk-2",
-      label: "Escalation Risk",
-      confidence: 0.78,
-      urgency: 6,
-      recommended_action: "phone_call",
-    },
-  ];
-}
 
-export async function analyzeSmsUrgency(_text: string) {
+
+import { Incident } from "../types";
+/**
+ * Frontend Gemini is disabled for security + stability.
+ * All Gemini calls should happen on the backend.
+ */
+export const analyzeSmsUrgency = async (_text: string) => {
+  // TODO: call backend endpoint instead (recommended)
+  // Example:
+  // const res = await fetch("http://localhost:3001/api/analyze", { ... })
+  // return await res.json();
   return {
     urgency: 7,
-    category: "harassment",
-    recommended_action: "phone_call",
-    sentiment: "panic",
+    category: "general_fear",
+    recommended_action: "safety_check",
+    sentiment: "fear",
+    demo: true,
   };
-}
+};
+export const getPredictiveInsights = async (_incidents: Incident[]) => {
+  // Demo-safe placeholder
+  return [
+    {
+      pattern: "Fridays 10pm–2am spike",
+      risk: "High harassment risk",
+      when: "Fri/Sat nights 10pm–2am",
+      where: "Main St bar district",
+      prevention: "Pre-position 2 volunteers near Main & Jackson",
+    },
+  ];
+};
